@@ -30,9 +30,11 @@ public class DataServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		int num=Box.getBox1().size();
-		
-		String str = String.format("{\"num\":%s}",num);	
+		int num1=Box.getSize1();
+		int num2=Box.getSize2();
+		int num3=Box.getSize3();
+		int num4=Box.getSize4();
+		String str = String.format("{\"num1\":%s,\"num2\":%s,\"num3\":%s,\"num4\":%s}",num1,num2,num3,num4);	
 		JSONObject json = JSONObject.fromObject(str);
 		out.println(str);
 		out.flush();

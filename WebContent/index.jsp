@@ -59,14 +59,8 @@ function show(){
 	  timeout:1000,
 	  success:function(dates){
 	  console.log(dates);
-      var num= dates.num; 
-      console.log(num)
-       $("#mainContent").empty();
-       for(var i=0;i<num;i++){
-           $("#mainContent").append("<button>"+i+"</button>");
-       }
-       $("#mainContent").append(num);
-	  console.log("YES");
+      $("#mainContent").empty();
+      $("#mainContent").append(dates.num1+dates.num2+dates.num3+dates.num4);
 	  },
 	  error: function() {
 		  console.log("Error");
