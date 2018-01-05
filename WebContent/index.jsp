@@ -12,13 +12,40 @@
 <div id="mainContent"></div>
 
 <a href="MainServlet"><button >启动</button></a>
+<button onClick="ajaxShow()">ajax启动</button>
+<button onClick="pause()">暂停</button>
+<button onClick="reset()">重置</button>
 <button onClick="show()">查看</button>
 
+<script type="text/javascript">
 
+function pause(){
+	   $.ajax({
+        url : 'DownServlet',
+        async : true,
+        type : "POST",
+    });
+}
+function ajaxShow(){
+	   $.ajax({
+           url : 'MainServlet',
+           async : true,
+           type : "POST",
+       });
+}
+
+function reset() {
+	   $.ajax({
+           url : 'ResetServlet',
+           async : true,
+           type : "POST",
+       });
+}
+</script>
 
 
 <script language="JavaScript"> 
-window.setInterval(show,100); 
+//window.setInterval(show,100); 
 function show(){
 	 
 	 var url = "DataServlet";

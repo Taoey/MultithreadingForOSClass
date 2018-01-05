@@ -1,17 +1,13 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.Box;
-import domain.Buffer;
-import domain.Consumer;
-import domain.Producer;
+import domain.MyController;
 
 /**
  * Servlet implementation class MainServlet
@@ -31,15 +27,8 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Integer> box=Box.getBox();
-		Buffer buffer=new Buffer(10,box);
-				
-		Consumer c=new Consumer(buffer,1);
-		Producer p= new Producer(buffer,10);
+		MyController.crun();
 		
-		new Thread(c).start();
-		new Thread(p).start();
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

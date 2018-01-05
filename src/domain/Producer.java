@@ -3,21 +3,23 @@ package domain;
 public class Producer implements Runnable{
 	private Buffer buffer;
 	private int speed;
-	
+	private boolean running;
 	
 	public Producer(Buffer buffer) {
 		this.buffer=buffer;
 		speed=6000;
+		running=true;
 	}
 	
 	public Producer(Buffer buffer,int speed) {
 		this.speed=speed;
 		this.buffer = buffer;
+		running=true;
 	}
 		
 	@Override
 	public void run() {
-		while(true) {
+		while(running) {
 			int pushNum=(int) (Math.random()*100);
 			buffer.push(pushNum);
 			
@@ -30,6 +32,10 @@ public class Producer implements Runnable{
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void mstop() {
+		running=false;
 	}
 
 	

@@ -4,21 +4,23 @@ public class Consumer implements Runnable {
 
 	private Buffer buffer;
 	private int speed;
-	
+	private boolean running;
 	
 	public Consumer(Buffer buffer) {
 		this.buffer=buffer;
 		speed=6000;
+		running=true;
 	}
 	
 	public Consumer(Buffer buffer,int speed) {
 		this.speed=speed;
 		this.buffer = buffer;
+		running=true;
 	}
 		
 	@Override
 	public void run() {
-		while(true) {
+		while(running) {
 			buffer.pop();
 			
 			try {
@@ -30,6 +32,9 @@ public class Consumer implements Runnable {
 				e.printStackTrace();
 			}
 		}
+	}
+	public void mstop() {
+		running=false;
 	}
 
 	

@@ -1,26 +1,24 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import domain.Box;
-import net.sf.json.JSONObject;
+import domain.MyController;
 
 /**
- * Servlet implementation class DataServlet
+ * Servlet implementation class DownServlet
  */
-public class DataServlet extends HttpServlet {
+public class DownServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DataServlet() {
+    public DownServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +27,10 @@ public class DataServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		int num=Box.getBox1().size();
+		MyController.cstop();
+		//response.sendRedirect(request.getContextPath()+"/index.jsp");
+		return;
 		
-		String str = String.format("{\"num\":%s}",num);	
-		JSONObject json = JSONObject.fromObject(str);
-		out.println(str);
-		out.flush();
-		out.close();
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		return;		
 	}
 
 	/**
