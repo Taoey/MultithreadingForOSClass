@@ -45,7 +45,7 @@ function reset() {
 
 
 <script language="JavaScript"> 
-//window.setInterval(show,100); 
+window.setInterval(show,10); 
 function show(){
 	 
 	 var url = "DataServlet";
@@ -60,7 +60,7 @@ function show(){
 	  success:function(dates){
 	  console.log(dates);
       $("#mainContent").empty();
-      $("#mainContent").append(dates.num1+dates.num2+dates.num3+dates.num4);
+      $("#mainContent").append(""+dates.num1+dates.num2+dates.num3+dates.num4);
 	  },
 	  error: function() {
 		  console.log("Error");

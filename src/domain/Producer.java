@@ -5,12 +5,6 @@ public class Producer implements Runnable{
 	private int speed;
 	private boolean running;
 	
-	public Producer(Buffer buffer) {
-		this.buffer=buffer;
-		speed=6000;
-		running=true;
-	}
-	
 	public Producer(Buffer buffer,int speed) {
 		this.speed=speed;
 		this.buffer = buffer;
@@ -24,7 +18,7 @@ public class Producer implements Runnable{
 			buffer.push(pushNum);
 			
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(speed*1000);
 				
 				
 			} catch (InterruptedException e) {

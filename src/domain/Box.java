@@ -1,6 +1,8 @@
+
 package domain;
 
 import java.util.ArrayList;
+
 
 public class Box {
 	private static ArrayList<Integer> box1;
