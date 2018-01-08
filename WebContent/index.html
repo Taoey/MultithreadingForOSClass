@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多道程序</title>
+    <style type="text/css">
+        <!--
+        #a{  width:400px;  height:800px;  border:solid 2px black;  float:left;  margin:4px;background: lightblue;
+            font-fimily:"黑体";font-size:20px;}
+        #b{  width:400px;  height:800px;  border:solid 2px black;  float:left;  margin:4px;background: lightgrey;
+             font-fimily:"黑体";font-size:20px;}
+        #c{ width:400px;  height:700px;  border:solid 1px black;  float:left;  margin:0px; background:lightblue;
+            font-fimily:"黑体";font-size:20px;overflow: hidden;}
+        #d{ width:400px;  height:700px;  border:solid 1px black;  float:left;  margin:0px; background:lightgray;
+            font-fimily:"黑体";font-size:20px;overflow: hidden;}
+        #e{ width:400px;  height:300px;  border:solid 1px black;  float:left;  margin:0px; background:lightblue;
+            font-fimily:"黑体";font-size:20px;overflow: hidden;}
+        -->
+    </style>
+    <script language="JavaScript">
+      function check(){
+          var cap1=window.document.form1.B1C.value;
+          var cap2=window.document.form1.B2C.value;
+          var cap3=window.document.form1.B3C.value;
+          var p1n=window.document.form1.P1N.value;
+          var Speed1=window.document.form1.speedP1.value;
+          var p2n=window.document.form1.P2N.value;
+          var Speed2=window.document.form1.speedP2.value;
+          var ComposerNum=window.document.form1.composerNum.value;
+          var SpeedCom=window.document.form1.speedCom.value;
+          var ConsumerNum=window.document.form1.consumerNum.value;
+          var Speedm=window.document.form1.speedCon.value;
+      }
+    </script>
+</head>
+<body>
+
+<div id="a" >
+    <p align="center">显示区</p>
+    <div id="c">
+        box1当前物品数量：<input type="text" name="currentNum1">
+        box1空闲空间数量：<input type="text" name="spaceNum1"> <br/></br>
+        box2当前物品数量：<input type="text" name="currentNum2">
+        box2空闲空间数量：<input type="text" name="spaceNum2"> <br/></br>
+        box3当前物品数量：<input type="text" name="currentNum3">
+        box3空闲空间数量：<input type="text" name="spaceNum3"> <br/></br>
+        等&nbsp待&nbsp线&nbsp程&nbsp个&nbsp数&nbsp&nbsp&nbsp：<input type="text" name="waitnum"><br/>
+    </div>
+</div>
+<div id="b">
+    <p align="center">参数设置</p>
+    <div id="d">
+       <br name="form1" action="1.jsp" method="post" onsubmit="return check()">
+           box1&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B1C"><br/></br>
+           box2&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B2C"><br/></br>
+           box3&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B3C"><br/></br>
+           生产线1工人数量：<input type="text" name="P1N"><br/></br>
+           生产线1工人速度：<input type="text" name="speedP1"><br/></br>
+           生产线2工人数量：<input type="text" name="P2N"><br/></br>
+           生产线2工人速度：<input type="text" name="speedP2"><br/></br>
+           组&nbsp&nbsp装&nbsp&nbsp者&nbsp&nbsp数&nbsp&nbsp量&nbsp：<input type="text" name="composerNum"><br/></br>
+           组&nbsp&nbsp装&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCom"><br/></br>
+           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp数&nbsp&nbsp量&nbsp：<input type="text" name="consumerNum"><br/></br>
+           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCon"><br/></br>
+                     <p align="center"><input type ="submit" value="确定" style="height:30px;width:100px;font-size:15px;">
+                     <input type ="reset" value="重置" style="height:30px;width:100px;font-size:15px;"></p>
+
+       </form>
+    </div>
+
+</div>
+<div id="a">
+     <p align="center">控制区</p>
+     <div id="e">
+        <p align="center" ><input type="button" value="暂停执行"style="height:30px;width:100px;font-size:15px;">
+        <input type="button" value="继续执行" style="height:30px;width:100px;font-size:15px;"></p>
+        总&nbsp&nbsp&nbsp的&nbsp&nbsp&nbsp运&nbsp&nbsp&nbsp行&nbsp&nbsp&nbsp时&nbsp&nbsp&nbsp间&nbsp：<input type="text" name="runtime" style="height:20px;width:100px;"><br/></br>
+        处&nbsp&nbsp理&nbsp&nbsp的&nbsp&nbsp物&nbsp&nbsp品&nbsp&nbsp个&nbsp&nbsp数&nbsp：<input type="text" name="sumNum"style="height:20px;width:100px;"><br/></br>
+        平均每个box中物品个数：<input type="text" name="avgNum" style="height:20px;width:100px;"><br/></br>
+    </div>
+    <p align="center"><input type="button" value="保存" style="height:30px;width:100px;font-size:15px;"></p></br>
+    请输入存储路径：<input type="text" name="path"><br/></br>
+</div>
+</body>
+</html>

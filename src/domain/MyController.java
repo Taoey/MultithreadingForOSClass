@@ -1,6 +1,7 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.Vector;
+import java.util.Vector;
 /**
  * buffer4 暂时没有用到
  * @author 黄为涛
@@ -9,10 +10,10 @@ import java.util.ArrayList;
 public class MyController extends Thread{
 	private static MyController c=null;
 	
-	private ArrayList<Integer> box1;
-	private ArrayList<Integer> box2;
-	private ArrayList<Integer> box3;
-	private ArrayList<Integer> box4;
+	private Vector<Integer> box1;
+	private Vector<Integer> box2;
+	private Vector<Integer> box3;
+	private Vector<Integer> box4;
 	
 	private Buffer buffer1;
 	private Buffer buffer2;
@@ -28,11 +29,15 @@ public class MyController extends Thread{
 	private int composerSpeed;
 	private int consumerSpeed;
 	
-	private ArrayList<Producer>producer1List;
-	private ArrayList<Producer>producer2List;
-	private ArrayList<Composer>composerList;
-	private ArrayList<Consumer>consumerList;
-
+	private Vector<Producer>producer1List;
+	private Vector<Producer>producer2List;
+	private Vector<Composer>composerList;
+	private Vector<Consumer>consumerList;
+	
+	Producer p1;
+	Producer p2;
+	Composer com ;
+	Consumer con;
 	
 	/**
 	 * 
@@ -60,33 +65,14 @@ public class MyController extends Thread{
 		 buffer3=new Buffer(3,B3C,box3);
 		 buffer4=new Buffer(4,1000,box4);//设置buffer4的默认容量为1000；
 		 
-		 this.P1N=P1N;
-		 this.speedP1=speedP1;
-		 this.P2N=P2N;
-		 this.speedP1=speedP1;
-		 this.composerNum=composerNum;
-		 this.composerSpeed=composerSpeed;
+		 
 		 this.consumerNum=consumerNum;
-		 this.consumerSpeed=consumerNum;
-		 
-		 producer1List =new ArrayList<>();
-		 producer2List =new ArrayList<>();
-		 composerList =new ArrayList<>();
-		 consumerList =new ArrayList<>();
-		 
-		 
-		for(int i=0;i<P1N;i++) {
-			Producer producer = new Producer(buffer1,speedP1);
-			producer1List.add(producer);
-		}
-		for(int i=0;i<P2N;i++) {
-			Producer producer = new Producer(buffer2,speedP2);
-			producer2List.add(producer);
-		}
-		for(int i=0;i<composerNum;i++) {
-			Composer composer = new Composer(buffer1,buffer2,buffer3,composerSpeed);
-			composerList.add(composer);
-		}
+		 this.consumerSpeed=consumerSpeed;
+		 p1=new Producer(buffer1, speedP1);
+		 p2=new Producer(buffer2, speedP2);
+		 com =new Composer(buffer1,buffer2,buffer3, speedCom);
+		 con =new Consumer(buffer3,buffer4,speedCon);
+
 	}
 	
 	public static void createController(int B1C,int B2C,int B3C,int P1N,int speedP1,int P2N,int speedP2,int composerNum,int speedCom,int consumerNum,int speedCon) throws InterruptedException{
@@ -97,24 +83,13 @@ public class MyController extends Thread{
 	}
 	@Override
 	public void run() {
-		for(int i=0;i<producer1List.size();i++) {
-			new Thread(producer1List.get(i)).start();
-		}
-		for(int i=0;i<producer2List.size();i++) {
-			new Thread(producer2List.get(i)).start();
-
-		}
-		for(int i=0;i<composerList.size();i++) {
-			new Thread(composerList.get(i)).start();
-	    }
-		
-
-
+		new Thread(p1).start();
+		new Thread(p2).start();
+		new Thread(com).start();
 //		for(int i=0;i<consumerNum;i++) {
-//			Consumer consumer = new Consumer(buffer3,buffer4,consumerSpeed);
-//			consumerList.add(consumer);
-//			new Thread(consumer).start();
+//			new Thread(new Consumer(buffer3,buffer4,consumerSpeed)).start();
 //		}
+		new Thread(con).start();
 	}
 	public static void crun(int B1C,int B2C,int B3C,int P1N,int speedP1,int P2N,int speedP2,int composerNum,int speedCom,int consumerNum,int speedCon) {
 		if(c==null) {
@@ -122,27 +97,20 @@ public class MyController extends Thread{
 		}
 		c.start();
 	}
-	
-	
-	
-	
-	
-	
-	
 
 	public static void cstop() {
-		for(int i=0;i<c.producer1List.size();i++) {
-			c.producer1List.get(i).mstop();
-		}
-		for(int i=0;i<c.producer2List.size();i++) {
-			c.producer2List.get(i).mstop();
-		}
-		for(int i=0;i<c.composerList.size();i++) {
-			c.composerList.get(i).mstop();
-		}
-		for(int i=0;i<c.composerList.size();i++) {
-			c.composerList.get(i).mstop();
-		}
+		c.p1.mstop();
+		c.p2.mstop();
+		c.com.mstop();
+		c.con.mstop();
+	}
+	
+	public static void cstart() {
+		c.p1.mrun();
+		c.p2.mrun();
+		c.com.mrun();
+		c.con.mrun();
+		c.run();
 	}
 	public static void creset() throws InterruptedException {
 		c.cstop();
@@ -151,9 +119,6 @@ public class MyController extends Thread{
 		c.box2.clear();
 		c.box3.clear();
 		c.box4.clear();
-		 //c.buffer=new Buffer(10,c.box);			
-		// c.p= new Producer(c.buffer,10);
-		 //c.con=new Consumer(c.buffer,1);
 	    c=null;
 
 	}

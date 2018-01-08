@@ -49,4 +49,24 @@
     <servlet-name>ResetServlet</servlet-name>
     <url-pattern>/ResetServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SaveDataServlet</display-name>
+    <servlet-name>SaveDataServlet</servlet-name>
+    <servlet-class>servlet.SaveDataServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveDataServlet</servlet-name>
+    <url-pattern>/SaveDataServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RerunServlet</display-name>
+    <servlet-name>RerunServlet</servlet-name>
+    <servlet-class>servlet.RerunServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RerunServlet</servlet-name>
+    <url-pattern>/RerunServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

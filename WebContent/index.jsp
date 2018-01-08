@@ -15,8 +15,9 @@
 <button onClick="ajaxShow()">ajax启动</button>
 <button onClick="pause()">暂停</button>
 <button onClick="reset()">重置</button>
+<button onClick="rerun()">继续</button>
 <button onClick="show()">查看</button>
-
+<button onClick="saveData()">保存数据</button>
 <script type="text/javascript">
 
 function pause(){
@@ -33,10 +34,23 @@ function ajaxShow(){
            type : "POST",
        });
 }
-
+function rerun(){
+	   $.ajax({
+        url : 'RerunServlet',
+        async : true,
+        type : "POST",
+    });
+}
 function reset() {
 	   $.ajax({
            url : 'ResetServlet',
+           async : true,
+           type : "POST",
+       });
+}
+function saveData(){
+	   $.ajax({
+           url : 'SaveDataServlet',
            async : true,
            type : "POST",
        });
@@ -45,7 +59,7 @@ function reset() {
 
 
 <script language="JavaScript"> 
-window.setInterval(show,10); 
+window.setInterval(show,100); 
 function show(){
 	 
 	 var url = "DataServlet";
@@ -60,7 +74,7 @@ function show(){
 	  success:function(dates){
 	  console.log(dates);
       $("#mainContent").empty();
-      $("#mainContent").append(""+dates.num1+dates.num2+dates.num3+dates.num4);
+      $("#mainContent").append(""+dates.num1+dates.num2+dates.num3+dates.num4+dates.num5);
 	  },
 	  error: function() {
 		  console.log("Error");

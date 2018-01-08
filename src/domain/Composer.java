@@ -42,5 +42,8 @@ public class Composer implements Runnable{
 	public void mstop() {
 		running=false;
 	}
+	public void mrun() {
+		running=true;
+	}
 
 }

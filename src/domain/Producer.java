@@ -13,23 +13,29 @@ public class Producer implements Runnable{
 		
 	@Override
 	public void run() {
-		while(running) {
-			int pushNum=(int) (Math.random()*100);
-			buffer.push(pushNum);
-			
-			try {
-				Thread.sleep(speed*1000);
+		synchronized(buffer) {
+			while(running) {
+				int pushNum=(int) (Math.random()*100);
+				buffer.push(pushNum);
 				
-				
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				try {
+					Thread.sleep(speed*1000);
+					
+					
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}			
 		}
+
 	}
 	
 	public void mstop() {
 		running=false;
+	}
+	public void mrun() {
+		running=true;
 	}
 
 	

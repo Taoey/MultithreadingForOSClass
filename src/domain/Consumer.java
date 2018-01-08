@@ -40,6 +40,9 @@ public class Consumer implements Runnable {
 	public void mstop() {
 		running=false;
 	}
+	public void mrun() {
+		running=true;
+	}
 
 	
 	
