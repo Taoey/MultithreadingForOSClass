@@ -27,6 +27,50 @@ public class Composer implements Runnable{
 	
 	@Override
 	public void run() {
+		synchronized (buffer1) {
+			synchronized (buffer2) {
+				synchronized (buffer3) {
+					while(running) {
+						if(buffer3.getIndex()<=0) {
+							try {
+								System.out.println("b1阻塞");
+								buffer1.wait();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+						if(buffer2.getIndex()<=0) {
+							try {
+								System.out.println("b2阻塞");
+								buffer2.wait();
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						if(buffer3.getIndex()==buffer3.getCapacity()) {
+							try {
+								System.out.println("b3阻塞");
+								buffer3.wait();
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						buffer1.pop();
+						buffer2.pop();
+						buffer3.push(1);
+						System.out.println("b1删除了元素");
+						System.out.println("b2删除了元素");
+						System.out.println("b3添加了元素");
+						buffer3.notifyAll();
+					}
+					
+				}
+				
+			}
+			
+		}
 		while(running) {
 			buffer1.pop();
 			buffer2.pop();

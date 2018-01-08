@@ -47,16 +47,37 @@ public class Box {
 	}
 	
 	public static int getSize1() {
-		return box1.size();
+		if(box1!=null) {
+			return box1.size();
+		}
+		else {
+			return -1;
+		}
+		
 	}
 	public static int getSize2() {
-		return box2.size();
+		if(box2!=null) {
+			return box2.size();
+		}
+		else {
+			return -1;
+		}
 	}
 	public static int getSize3() {
-		return box3.size();
+		if(box3!=null) {
+			return box3.size();
+		}
+		else {
+			return -1;
+		}
 	}
 	public static int getSize4() {
-		return box4.size();
+		if(box4!=null) {
+			return box4.size();
+		}
+		else {
+			return -1;
+		}
 	}
 	
 	public static void addBlockNum() {

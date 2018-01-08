@@ -28,7 +28,7 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//MyController.crun(3,3,20,1,3,1,3,1,1,1,5);
-		MyController.crun(3,3,20,1,3,1,3,1,3,3,100);
+		MyController.crun(3,3,20,1,3,1,3,1,3,1,100);
 	}
 
 	/**

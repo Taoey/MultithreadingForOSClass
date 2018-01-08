@@ -2,8 +2,8 @@ package domain;
 
 public class Consumer implements Runnable {
 
-	private Buffer popB;
-	private Buffer pushB;
+	private Buffer buffer3;
+	private Buffer buffer4;
 	
 	private int speed;
 	private boolean running;
@@ -18,16 +18,36 @@ public class Consumer implements Runnable {
 	 */
 	public Consumer(Buffer popB,Buffer pushB,int speed) {
 		this.speed=speed;
-		this.popB=popB;
-		this.pushB = pushB;
+		this.buffer3=popB;
+		this.buffer4 = pushB;
 		running=true;
 	}
 		
 	@Override
 	public void run() {
+		synchronized (buffer3) {
+			synchronized (buffer4) {
+				while(running) {
+					if(buffer3.getList().size()<0) {
+						try {
+							System.out.println("b3阻塞");
+							buffer3.wait();
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					buffer3.pop();
+					buffer4.push(1);
+					System.out.println("b3添加了元素");
+				}
+			}
+			
+		}
+		
 		while(running) {
-			popB.pop();
-			pushB.push(1);
+			buffer3.pop();
+			buffer4.push(1);
 			try {
 				Thread.sleep(speed*1000);
 				

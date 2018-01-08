@@ -71,7 +71,7 @@ public class MyController extends Thread{
 		 p1=new Producer(buffer1, speedP1);
 		 p2=new Producer(buffer2, speedP2);
 		 com =new Composer(buffer1,buffer2,buffer3, speedCom);
-		 con =new Consumer(buffer3,buffer4,speedCon);
+		 //con =new Consumer(buffer3,buffer4,speedCon);
 
 	}
 	
@@ -89,7 +89,7 @@ public class MyController extends Thread{
 //		for(int i=0;i<consumerNum;i++) {
 //			new Thread(new Consumer(buffer3,buffer4,consumerSpeed)).start();
 //		}
-		new Thread(con).start();
+		//new Thread(con).start();
 	}
 	public static void crun(int B1C,int B2C,int B3C,int P1N,int speedP1,int P2N,int speedP2,int composerNum,int speedCom,int consumerNum,int speedCon) {
 		if(c==null) {
