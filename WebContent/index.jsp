@@ -57,7 +57,6 @@ function saveData(){
 }
 </script>
 
-
 <script language="JavaScript"> 
 window.setInterval(show,100); 
 function show(){
@@ -82,5 +81,6 @@ function show(){
 	 });
 	 }
 </script>
+
 </body>
 </html>

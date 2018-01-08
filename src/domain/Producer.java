@@ -15,23 +15,13 @@ public class Producer implements Runnable{
 	public void run() {
 		synchronized(buffer) {
 			while(running) {
-				while(buffer.getCapacity()==buffer.getIndex()) {
-					try {
-						Box.addBlockNum();
-						System.out.println("P阻塞了");
-						buffer.wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				System.out.println("P运行了");
-				Box.subBlockNum();
-				buffer.notify();
-				
 				int pushNum=(int) (Math.random()*100);
-				buffer.push(pushNum);				
+				buffer.push(pushNum);
+				
 				try {
-					Thread.sleep(speed*1000);					
+					Thread.sleep(speed*1000);
+					
+					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

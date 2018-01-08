@@ -27,12 +27,12 @@ public class SaveDataServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String RunTime;
-		String SumNum;
+		String SumNum;	
 		
-		
-		
+		String path = request.getParameter("path");
+		System.out.println(path);
 		String data= "data";
-		Myutil.addSrring2File("D://data.txt", data);
+		Myutil.addSrring2File(path, data);
 	}
 
 	/**
