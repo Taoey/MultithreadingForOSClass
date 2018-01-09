@@ -27,7 +27,7 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int B1C =Integer.parseInt(request.getParameter("B1C"));
+		//int B1C =Integer.parseInt(request.getParameter("B1C"));
 //		int B2C = Integer.parseInt(request.getParameter("B2C"));
 //		int B3C = Integer.parseInt(request.getParameter("B3C"));
 //		int P1N = Integer.parseInt(request.getParameter("P1N"));
@@ -40,6 +40,7 @@ public class MainServlet extends HttpServlet {
 //		int speedCon= Integer.parseInt(request.getParameter("speedCon"));
 
 		MyController.crun(3,3,10,1,5,1,5,1,1,3,1);
+		//System.out.println(B1C);
 		//request.getRequestDispatcher("index.html").forward(request,response); 
 		
 	}

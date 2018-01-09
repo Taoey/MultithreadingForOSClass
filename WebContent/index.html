@@ -5,13 +5,13 @@
     <title>多道程序</title>
     <style type="text/css">
         <!--
-        #a{  width:400px;  height:800px;  border:solid 2px black;  float:left;  margin:4px;background: lightblue;
+        #a{  width:400px;  height:600px;  border:solid 2px black;  float:left;  margin:4px;background: lightblue;
             font-fimily:"黑体";font-size:20px;}
-        #b{  width:400px;  height:800px;  border:solid 2px black;  float:left;  margin:4px;background: lightgrey;
+        #b{  width:400px;  height:600px;  border:solid 2px black;  float:left;  margin:4px;background: lightgrey;
              font-fimily:"黑体";font-size:20px;}
-        #c{ width:400px;  height:700px;  border:solid 1px black;  float:left;  margin:0px; background:lightblue;
+        #c{ width:400px;  height:500px;  border:solid 1px black;  float:left;  margin:0px; background:lightblue;
             font-fimily:"黑体";font-size:20px;overflow: hidden;}
-        #d{ width:400px;  height:700px;  border:solid 1px black;  float:left;  margin:0px; background:lightgray;
+        #d{ width:400px;  height:500px;  border:solid 1px black;  float:left;  margin:0px; background:lightgray;
             font-fimily:"黑体";font-size:20px;overflow: hidden;}
         #e{ width:400px;  height:300px;  border:solid 1px black;  float:left;  margin:0px; background:lightblue;
             font-fimily:"黑体";font-size:20px;overflow: hidden;}
@@ -38,18 +38,15 @@
     <div id="d">
     
        
-           box1&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B1C"><br/></br>
-           box2&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B2C"><br/></br>
-           box3&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B3C"><br/></br>
-           生产线1工人数量：<input type="text" name="P1N"><br/></br>
-           生产线1工人速度：<input type="text" name="speedP1"><br/></br>
-           生产线2工人数量：<input type="text" name="P2N"><br/></br>
-           生产线2工人速度：<input type="text" name="speedP2"><br/></br>
-           组&nbsp&nbsp装&nbsp&nbsp者&nbsp&nbsp数&nbsp&nbsp量&nbsp：<input type="text" name="composerNum"><br/></br>
-           组&nbsp&nbsp装&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCom"><br/></br>
-           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp数&nbsp&nbsp量&nbsp：<input type="text" name="consumerNum"><br/></br>
-           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCon"><br/></br>
-                     <p align="center"><input type="submit" value="启动" onClick="ajaxShow()" style="height:30px;width:100px;font-size:15px;">
+           box1&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B1C" value="5"><br/></br>
+           box2&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B2C" value="5"><br/></br>
+           box3&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B3C" value="15"><br/></br>
+           生产线1工人速度：<input type="text" name="speedP1" value="5"><br/></br>
+           生产线2工人速度：<input type="text" name="speedP2" value="5"><br/></br>
+           组&nbsp&nbsp装&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCom" value="1"><br/></br>
+           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp数&nbsp&nbsp量&nbsp：<input type="text" name="consumerNum" value="3"><br/></br>
+           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCon" value="1"><br/></br>
+                     <p align="center"><input type="button" value="启动" onClick="ajaxShow()" style="height:30px;width:100px;font-size:15px;">
                      <input type ="reset" value="重置" style="height:30px;width:100px;font-size:15px;"></p>
        
     </div>
@@ -61,8 +58,8 @@
         <p align="center" ><input type="button" value="暂停执行" onClick="pause()" style="height:30px;width:100px;font-size:15px;">
         <input type="button" onClick="rerun()"value="继续执行" style="height:30px;width:100px;font-size:15px;"></p>
         总&nbsp&nbsp&nbsp的&nbsp&nbsp&nbsp运&nbsp&nbsp&nbsp行&nbsp&nbsp&nbsp时&nbsp&nbsp&nbsp间&nbsp：<input type="text" name="runtime" style="height:20px;width:100px;"><br/></br>
-        处&nbsp&nbsp理&nbsp&nbsp的&nbsp&nbsp物&nbsp&nbsp品&nbsp&nbsp个&nbsp&nbsp数&nbsp：<input type="text" name="sumNum"style="height:20px;width:100px;"><br/></br>
-        平均每个box中物品个数：<input type="text" name="avgNum" style="height:20px;width:100px;"><br/></br>
+        处&nbsp&nbsp理&nbsp&nbsp的&nbsp&nbsp物&nbsp&nbsp品&nbsp&nbsp个&nbsp&nbsp数&nbsp：<input type="text" name="sumNum" style="height:20px;width:100px;"><br/></br>
+<!--         平均每个box中物品个数：<input type="text" name="avgNum" style="height:20px;width:100px;"><br/></br> -->
     </div>
     <p align="center"><input onClick="saveData()" type="button" value="保存" style="height:30px;width:100px;font-size:15px;"></p></br>
     请输入存储路径：<input type="text" name="path" value="D://data.txt"><br/></br>
@@ -73,6 +70,10 @@
 </div>
 
 <script type="text/javascript">
+var isRun=false;
+var isStop=false;
+var starTime;
+var endTime;
 var B1C=$(" input[name='B1C']").val();  
 var B2C=$(" input[name='B2C']").val(); 
 var B3C=$(" input[name='B3C']").val(); 
@@ -85,32 +86,53 @@ var consumerNum=$(" input[name='consumerNum']").val();
 var speedCon=$(" input[name='speedCon']").val(); 
 
 function pause(){
-	   $.ajax({
-        url : 'DownServlet',
-        async : true,
-        type : "POST",
-    });
+	if(isRun){
+		isStop=true;
+	    endTime=new Date().getTime();
+	    console.log(endTime);
+	    var time=(endTime-starTime)/1000;
+	    console.log(time+"秒");
+	    $("input[name='runtime']").val(time+"秒");
+	}else{
+		alert("请先启动程序");
+	}
+
+// 	   $.ajax({
+//         url : 'DownServlet',
+//         type : "POST",
+//     });
 }
 function ajaxShow(){
-		var datas={B1C:B1C, B2C:B2C, B3C:B3C, P1N:P1N, speedP1:speedP1, P2N:P2N, speedP2:speedP2, composerNum:composerNum,speedCom:speedCom,consumerNum:consumerNum, speedCon:speedCon};
-	   $.ajax({
+	isRun=true;
+    starTime=new Date().getTime();
+    console.log(starTime);
+	//var datas={B1C:B1C, B2C:B2C, B3C:B3C, P1N:P1N, speedP1:speedP1, P2N:P2N, speedP2:speedP2, composerNum:composerNum,speedCom:speedCom,consumerNum:consumerNum, speedCon:speedCon};
+    var datas={B1C:B1C, B2C:B2C};
+	$.ajax({
            url : 'MainServlet',
            data:datas,
-           async : true,
            type : "POST",
        });
 }
 function rerun(){
-	   $.ajax({
-        url : 'RerunServlet',
-        async : true,
-        type : "POST",
-    });
+	if(isStop){
+		$("input[name='runtime']").val("");
+		starTime=new Date().getTime()-(endTime-starTime);
+		endTime=0;
+		   $.ajax({
+	        url : 'RerunServlet',
+	        type : "POST",
+	    });	
+	}else{
+		alert("请先暂停程序");
+	}
+
 }
 function reset() {
+	startTime=0;
+	endTime=0;
 	   $.ajax({
            url : 'ResetServlet',
-           async : true,
            type : "POST",
        });
 }
@@ -121,7 +143,6 @@ function saveData(){
 	   $.ajax({
            url : 'SaveDataServlet',
            data:datas,
-           async : true,
            type : "POST",
        });
 }
@@ -148,6 +169,14 @@ function show(){
       $("#currentNum2").val(dates.num2);
       $("#currentNum3").val("");
       $("#currentNum3").val(dates.num3);
+      $("input[name='sumNum']").val("");
+      $("input[name='sumNum']").val(dates.num4)
+      $("#spaceNum1").val("");
+      $("#spaceNum1").val(dates.freeBox1);
+      $("#spaceNum2").val("");
+      $("#spaceNum2").val(dates.freeBox2);   
+      $("#spaceNum3").val("");
+      $("#spaceNum3").val(dates.freeBox3)     
 	  },
 	  error: function() {
 		  console.log("Error");

@@ -61,6 +61,11 @@ public class MyController extends Thread{
 		 box2=Box.getBox2();
 		 box3=Box.getBox3();
 		 box4=Box.getBox4();
+		 
+		 Box.setBox1C(B1C);
+		 Box.setBox2C(B2C);
+		 Box.setBox3C(B3C);
+		 
 		 buffer1=new Buffer(1,B1C,box1);
 		 buffer2=new Buffer(2,B2C,box2);
 		 buffer3=new Buffer(3,B3C,box3);

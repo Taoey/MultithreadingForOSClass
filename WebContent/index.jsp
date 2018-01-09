@@ -74,6 +74,8 @@ function show(){
 	  console.log(dates);
       $("#mainContent").empty();
       $("#mainContent").append(""+dates.num1+dates.num2+dates.num3+dates.num4+dates.num5);
+      $("#mainContent").append("</br>"+dates.freeBox1+dates.freeBox2+dates.freeBox3);
+      $("#mainContent").append("</br>"+dates.box4Size);
 	  },
 	  error: function() {
 		  console.log("Error");

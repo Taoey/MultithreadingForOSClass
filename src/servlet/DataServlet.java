@@ -22,7 +22,6 @@ public class DataServlet extends HttpServlet {
      */
     public DataServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,7 +34,11 @@ public class DataServlet extends HttpServlet {
 		int num3=Box.getSize3();
 		int num4=Box.getSize4();
 		int num5=Box.getBlock();
-		String str = String.format("{\"num1\":%s,\"num2\":%s,\"num3\":%s,\"num4\":%s,\"num5\":%s}",num1,num2,num3,num4,num5);	
+		int freeBox1=Box.getBox1C()-Box.getSize1();
+		int freeBox2=Box.getBox2C()-Box.getSize2();
+		int freeBox3=Box.getBox3C()-Box.getSize3();
+		int box4Size=Box.getSize4();
+		String str = String.format("{\"num1\":%s,\"num2\":%s,\"num3\":%s,\"num4\":%s,\"num5\":%s,\"freeBox1\":%s,\"freeBox2\":%s,\"freeBox3\":%s,\"box4Size\":%s}",num1,num2,num3,num4,num5,freeBox1,freeBox2,freeBox3,box4Size);	
 		JSONObject json = JSONObject.fromObject(str);
 		out.println(str);
 		out.flush();
