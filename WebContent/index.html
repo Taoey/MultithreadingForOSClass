@@ -62,7 +62,7 @@
 <!--         平均每个box中物品个数：<input type="text" name="avgNum" style="height:20px;width:100px;"><br/></br> -->
     </div>
     <p align="center"><input onClick="saveData()" type="button" value="保存" style="height:30px;width:100px;font-size:15px;"></p></br>
-    请输入存储路径：<input type="text" name="path" value="D://data.txt"><br/></br>
+    请输入存储路径：<input type="text" name="path" value="C://data.json"><br/></br>
     
     <div id="sum">
     
@@ -77,10 +77,8 @@ var endTime;
 var B1C=$(" input[name='B1C']").val();  
 var B2C=$(" input[name='B2C']").val(); 
 var B3C=$(" input[name='B3C']").val(); 
-var P1N=$(" input[name='P1N']").val(); 
 var speedP1=$(" input[name='speedP1']").val(); 
 var speedP2=$(" input[name='speedP2']").val(); 
-var composerNum=$(" input[name='composerNum']").val(); 
 var speedCom=$(" input[name='speedCom']").val(); 
 var consumerNum=$(" input[name='consumerNum']").val(); 
 var speedCon=$(" input[name='speedCon']").val(); 
@@ -88,6 +86,7 @@ var speedCon=$(" input[name='speedCon']").val();
 function pause(){
 	if(isRun){
 		isStop=true;
+		isRun=false;
 	    endTime=new Date().getTime();
 	    console.log(endTime);
 	    var time=(endTime-starTime)/1000;
@@ -103,11 +102,13 @@ function pause(){
 //     });
 }
 function ajaxShow(){
+	isStop=false;
 	isRun=true;
     starTime=new Date().getTime();
     console.log(starTime);
-	//var datas={B1C:B1C, B2C:B2C, B3C:B3C, P1N:P1N, speedP1:speedP1, P2N:P2N, speedP2:speedP2, composerNum:composerNum,speedCom:speedCom,consumerNum:consumerNum, speedCon:speedCon};
-    var datas={B1C:B1C, B2C:B2C};
+	var datas={B1C:B1C, B2C:B2C, B3C:B3C,speedP1:speedP1, speedP2:speedP2,speedCom:speedCom,consumerNum:consumerNum, speedCon:speedCon};
+    console.log(datas);
+	//var datas={B1C:B1C, B2C:B2C};
 	$.ajax({
            url : 'MainServlet',
            data:datas,
@@ -116,6 +117,8 @@ function ajaxShow(){
 }
 function rerun(){
 	if(isStop){
+		isStop=false;
+		isRun=true;
 		$("input[name='runtime']").val("");
 		starTime=new Date().getTime()-(endTime-starTime);
 		endTime=0;
@@ -129,6 +132,8 @@ function rerun(){
 
 }
 function reset() {
+	isStop=false;
+	isRun=true;
 	startTime=0;
 	endTime=0;
 	   $.ajax({
@@ -137,21 +142,24 @@ function reset() {
        });
 }
 function saveData(){
+	   var time =$("input[name='runtime']").val();
 	   var path=$(" input[name='path']").val();
-	   //alert(path);
-	   var datas={path:path};
+	   var sumNum=$("input[name='sumNum']").val();
+	   var datas={path:path,time:time,sumNum:sumNum,B1C:B1C, B2C:B2C, B3C:B3C,speedP1:speedP1, speedP2:speedP2,speedCom:speedCom,consumerNum:consumerNum, speedCon:speedCon};
 	   $.ajax({
            url : 'SaveDataServlet',
            data:datas,
            type : "POST",
        });
+	   alert("保存成功");
 }
 </script>
 
 <script language="JavaScript"> 
-window.setInterval(show,100); 
-function show(){
-	 
+
+window.setInterval(show,100);
+
+function show(){		 
 	 var url = "DataServlet";
 	 var data = {type:1};
 	 $.ajax({
@@ -162,21 +170,21 @@ function show(){
 	  //data : data,
 	  timeout:1000,
 	  success:function(dates){
-	  console.log(dates);
-      $("#currentNum1").val("");
-      $("#currentNum1").val(dates.num1);
-      $("#currentNum2").val("");
-      $("#currentNum2").val(dates.num2);
-      $("#currentNum3").val("");
-      $("#currentNum3").val(dates.num3);
-      $("input[name='sumNum']").val("");
-      $("input[name='sumNum']").val(dates.num4)
-      $("#spaceNum1").val("");
-      $("#spaceNum1").val(dates.freeBox1);
-      $("#spaceNum2").val("");
-      $("#spaceNum2").val(dates.freeBox2);   
-      $("#spaceNum3").val("");
-      $("#spaceNum3").val(dates.freeBox3)     
+	  //console.log(dates);
+     $("#currentNum1").val("");
+     $("#currentNum1").val(dates.num1);
+     $("#currentNum2").val("");
+     $("#currentNum2").val(dates.num2);
+     $("#currentNum3").val("");
+     $("#currentNum3").val(dates.num3);
+     $("input[name='sumNum']").val("");
+     $("input[name='sumNum']").val(dates.num4)
+     $("#spaceNum1").val("");
+     $("#spaceNum1").val(dates.freeBox1);
+     $("#spaceNum2").val("");
+     $("#spaceNum2").val(dates.freeBox2);   
+     $("#spaceNum3").val("");
+     $("#spaceNum3").val(dates.freeBox3)     
 	  },
 	  error: function() {
 		  console.log("Error");

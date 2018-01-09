@@ -26,13 +26,20 @@ public class SaveDataServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String RunTime;
-		String SumNum;	
-		
+		String time=request.getParameter("time");
+		String sumNum =request.getParameter("sumNum");		
 		String path = request.getParameter("path");
-		System.out.println(path);
-		String data= "data";
-		Myutil.addSrring2File(path, data);
+		String B1C = request.getParameter("B1C");
+		String B2C = request.getParameter("B2C");
+		String B3C = request.getParameter("B3C");
+		String speedP1 = request.getParameter("speedP1");
+		String speedP2 = request.getParameter("speedP2");
+		String speedCom= request.getParameter("speedCom");
+		String consumerNum = request.getParameter("consumerNum");
+		String speedCon= request.getParameter("speedCon");
+
+		String str=String.format("{'B1C':%s,'B2C':%s,'B3C':%s,'speedP1':%s,'speedP2':%s,'speedCom':%s,'consumerNum':%s,'speedCon':%s,'time':%s,'sumNum':%s}", B1C,B2C,B3C,speedP1,speedP2,speedCom,consumerNum,speedCon,time,sumNum);
+		Myutil.addSrring2File(path, str+"\n");
 	}
 
 	/**
