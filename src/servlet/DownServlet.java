@@ -28,10 +28,12 @@ public class DownServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MyController.cstop();
+		System.out.println("--------------------------------系统暂停------------------------------");
 		//response.sendRedirect(request.getContextPath()+"/index.jsp");
 		return;
 		
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

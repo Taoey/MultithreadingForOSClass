@@ -40,6 +40,7 @@ public class SaveDataServlet extends HttpServlet {
 
 		String str=String.format("{'B1C':%s,'B2C':%s,'B3C':%s,'speedP1':%s,'speedP2':%s,'speedCom':%s,'consumerNum':%s,'speedCon':%s,'time':%s,'sumNum':%s}", B1C,B2C,B3C,speedP1,speedP2,speedCom,consumerNum,speedCon,time,sumNum);
 		Myutil.addSrring2File(path, str+"\n");
+		System.out.println("保存了数据");
 	}
 
 	/**

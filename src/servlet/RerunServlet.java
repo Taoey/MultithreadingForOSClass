@@ -27,6 +27,7 @@ public class RerunServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MyController.cstart();
+		System.out.println("--------------------------系统重新开始------------------------------");
 	}
 
 	/**

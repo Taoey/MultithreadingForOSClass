@@ -30,7 +30,7 @@
         box2空闲空间数量：<input type="text" id="spaceNum2"> <br/></br>
         box3当前物品数量：<input type="text" id="currentNum3">
         box3空闲空间数量：<input type="text" id="spaceNum3"> <br/></br>
-        等&nbsp待&nbsp线&nbsp程&nbsp个&nbsp数&nbsp&nbsp&nbsp：<input type="text" name="waitnum"><br/>
+        等&nbsp待&nbsp线&nbsp程&nbsp个&nbsp数&nbsp&nbsp&nbsp：<input type="text" id="waitnum"><br/>
     </div>
 </div>
 <div id="b">
@@ -38,16 +38,16 @@
     <div id="d">
     
        
-           box1&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B1C" value="5"><br/></br>
-           box2&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B2C" value="5"><br/></br>
-           box3&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B3C" value="15"><br/></br>
-           生产线1工人速度：<input type="text" name="speedP1" value="5"><br/></br>
-           生产线2工人速度：<input type="text" name="speedP2" value="5"><br/></br>
-           组&nbsp&nbsp装&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCom" value="1"><br/></br>
-           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp数&nbsp&nbsp量&nbsp：<input type="text" name="consumerNum" value="3"><br/></br>
-           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCon" value="1"><br/></br>
+           box1&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B1C" ><br/></br>
+           box2&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B2C" ><br/></br>
+           box3&nbsp&nbsp&nbsp容&nbsp&nbsp&nbsp量&nbsp&nbsp&nbsp&nbsp&nbsp：<input type="text" name="B3C" ><br/></br>
+           生产线1工人速度：<input type="text" name="speedP1" ><br/></br>
+           生产线2工人速度：<input type="text" name="speedP2" ><br/></br>
+           组&nbsp&nbsp装&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCom" ><br/></br>
+           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp数&nbsp&nbsp量&nbsp：<input type="text" name="consumerNum"><br/></br>
+           消&nbsp&nbsp费&nbsp&nbsp者&nbsp&nbsp速&nbsp&nbsp度&nbsp：<input type="text" name="speedCon" ><br/></br>
                      <p align="center"><input type="button" value="启动" onClick="ajaxShow()" style="height:30px;width:100px;font-size:15px;">
-                     <input type ="reset" value="重置" style="height:30px;width:100px;font-size:15px;"></p>
+                     <input type ="reset" onClick="reset()" value="重置" style="height:30px;width:100px;font-size:15px;"></p>
        
     </div>
 
@@ -74,14 +74,6 @@ var isRun=false;
 var isStop=false;
 var starTime;
 var endTime;
-var B1C=$(" input[name='B1C']").val();  
-var B2C=$(" input[name='B2C']").val(); 
-var B3C=$(" input[name='B3C']").val(); 
-var speedP1=$(" input[name='speedP1']").val(); 
-var speedP2=$(" input[name='speedP2']").val(); 
-var speedCom=$(" input[name='speedCom']").val(); 
-var consumerNum=$(" input[name='consumerNum']").val(); 
-var speedCon=$(" input[name='speedCon']").val(); 
 
 function pause(){
 	if(isRun){
@@ -102,6 +94,14 @@ function pause(){
     });
 }
 function ajaxShow(){
+	var B1C=$(" input[name='B1C']").val();  
+	var B2C=$(" input[name='B2C']").val(); 
+	var B3C=$(" input[name='B3C']").val(); 
+	var speedP1=$(" input[name='speedP1']").val(); 
+	var speedP2=$(" input[name='speedP2']").val(); 
+	var speedCom=$(" input[name='speedCom']").val(); 
+	var consumerNum=$(" input[name='consumerNum']").val(); 
+	var speedCon=$(" input[name='speedCon']").val(); 
 	isStop=false;
 	isRun=true;
     starTime=new Date().getTime();
@@ -132,6 +132,7 @@ function rerun(){
 
 }
 function reset() {
+	alert("请重新输入数据");
 	isStop=false;
 	isRun=true;
 	startTime=0;
@@ -184,7 +185,10 @@ function show(){
      $("#spaceNum2").val("");
      $("#spaceNum2").val(dates.freeBox2);   
      $("#spaceNum3").val("");
-     $("#spaceNum3").val(dates.freeBox3)     
+     $("#spaceNum3").val(dates.freeBox3);  
+     $("#waitnum").val("");
+     $("#waitnum").val(dates.blockNum);
+     
 	  },
 	  error: function() {
 		  console.log("Error");

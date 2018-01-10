@@ -38,7 +38,8 @@ public class DataServlet extends HttpServlet {
 		int freeBox2=Box.getBox2C()-Box.getSize2();
 		int freeBox3=Box.getBox3C()-Box.getSize3();
 		int box4Size=Box.getSize4();
-		String str = String.format("{\"num1\":%s,\"num2\":%s,\"num3\":%s,\"num4\":%s,\"num5\":%s,\"freeBox1\":%s,\"freeBox2\":%s,\"freeBox3\":%s,\"box4Size\":%s}",num1,num2,num3,num4,num5,freeBox1,freeBox2,freeBox3,box4Size);	
+		int blockNum=Box.getBlock();
+		String str = String.format("{\"num1\":%s,\"num2\":%s,\"num3\":%s,\"num4\":%s,\"num5\":%s,\"freeBox1\":%s,\"freeBox2\":%s,\"freeBox3\":%s,\"box4Size\":%s,\"blockNum\":%s}",num1,num2,num3,num4,num5,freeBox1,freeBox2,freeBox3,box4Size,blockNum);	
 		JSONObject json = JSONObject.fromObject(str);
 		out.println(str);
 		out.flush();

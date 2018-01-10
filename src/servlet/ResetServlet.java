@@ -27,9 +27,9 @@ public class ResetServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		MyController.cstop();
 		try {
 			MyController.creset();
+			System.out.println("------------------------重置了数据-----------------------------------------------------");			
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

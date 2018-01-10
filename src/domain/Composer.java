@@ -29,6 +29,7 @@ public class Composer implements Runnable{
 	public void run() {
 		while(running) {
 			buffer1.pop();
+			buffer1.pop();
 			buffer2.pop();
 			buffer3.push(1);
 			try {

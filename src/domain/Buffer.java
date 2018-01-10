@@ -25,6 +25,7 @@ public class Buffer {
 	
 	
 	public void push(int num) {
+		Box.addBlockNum();
         lock.lock();
         try{
             //1)循环判断
@@ -41,6 +42,7 @@ public class Buffer {
 			} //会抛出异常
             
            }
+           Box.subBlockNum();
            list.add(num);
            System.out.println(id+"当前有：" +list.size());
            //2)使用消费condition唤醒进程
@@ -52,6 +54,7 @@ public class Buffer {
 	}
 
 	public  void pop() {
+		Box.addBlockNum();
         lock.lock();
         try
         {
@@ -66,9 +69,10 @@ public class Buffer {
 			}
 			
            }
+           Box.subBlockNum();
            //2)使用生产者condition唤醒进程  
            condition_pro.signal(); //消费者消费完毕后，唤醒生产者的进程
-           int popNum = list.remove(0);           
+           int popNum = list.remove(0);    
    		   System.out.println(id+"取出了："+1);
    		   System.out.println(id+"当前有:"+list.size());
         }

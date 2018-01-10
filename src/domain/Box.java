@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Vector;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
 
 public class Box {
 	private static Vector<Integer> box1;
@@ -95,7 +97,12 @@ public class Box {
 		blockNum=blockNum-1;
 	}
 	public static int getBlock() {
-		return blockNum;
+		if(blockNum>0) {
+			return blockNum;
+		}else {
+			return Math.abs(blockNum);
+		}
+		
 	}
 	public static int getBox1C() {
 		return box1C;
